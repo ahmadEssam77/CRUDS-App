@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/index_style.css">
+    <title>CRUD Again || Program</title>
+</head>
+
+<body>
+    <!-- =================== Title =================== -->
+    <h2 class="bg-black text-white text-center mx-auto my-3">Create, Retreve or read, Update, Delete, and search</h2>
+
+    <!-- =================== My Inputs Section =================== -->
+    <section class="my-inputs w-75 mx-auto p-3">
+        <label for="">Product Name:</label>
+        <input type="text" class="form-control my-2" name="" id="pName">
+        <p class="productErrMss text-center bg-danger d-none"><small>The product name must start with a capital letter and with lenght at least 3</small></p>
+        <label for="">Product Price:</label>
+        <input type="text" class="form-control my-2" name="" id="pPrice">
+        <p class="priceErrMss text-center bg-danger d-none"><small>The price should be a number and its range 100 => 1000000</small></p>
+        <label for="">Product Category:</label>
+        <input type="text" class="form-control my-2" name="" id="pCat">
+        <label for="">Product Description:</label>
+        <textarea class="form-control my-2" id="pDesc"></textarea>
+        <button class="btn btn-outline-secondary my-3" id="mainBtn">Add Product</button>
+        <div>
+            <input type="search" name="" class="w-50 mx-auto form-control mb-3" id="mySearch" placeholder="Search . .">
+        </div>
+    </section>
+
+    <!-- =================== Display Section =================== -->
+    <section class="w-75 mx-auto my-4">
+        <table class="table">
+            <thead>
+                <th class="number">Number</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th class="cat">Category</th>
+                <th class="desc">Description</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </thead>
+            <tbody id="displayHere">
+                
+                
+            </tbody>
+            <tfoot>
+
+            </tfoot>
+        </table>
+    </section>
+
+
+
+
+
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

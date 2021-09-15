@@ -1,0 +1,43 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h2 {
+    width: 50%;
+}
+
+textarea {
+    resize: none;
+}
+
+.my-inputs {
+    background-color: #ccc;
+}
+
+.number, .cat, .desc, .tbody-num,
+.tbody-cat, .tbody-desc {
+    opacity: 1;
+}
+
+
+
+
+
+/* ==================== MEDIA QUERY ==================== */
+@media screen and (max-width: 600px) {
+    h2 {
+        width: 90%;
+    }
+
+    .number, .cat, .desc, .tbody-num,
+    .tbody-cat, .tbody-desc {
+        display: none;
+    }
+
+}
