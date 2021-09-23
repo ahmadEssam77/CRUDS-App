@@ -8,7 +8,7 @@
 
    Validation (price) ==> 
    isExist (for product name) ==>
-   Adjust isEmpty fun ==>
+   Make the catigory section as dropdown list ==>
 */
 
 // ================ Holding The Needed Elements ================
@@ -47,6 +47,7 @@ mainBtn.addEventListener('click', function () {
             localStorage.setItem("CRUDS_Data", JSON.stringify(CRUDSArray));
 
             display();
+            isExist();
             clear();
         }
     }
@@ -68,7 +69,7 @@ function display() {
                 <td>${CRUDSArray[i].price}</td>
                 <td class="tbody-cat">${CRUDSArray[i].cat}</td>
                 <td class="tbody-desc">${CRUDSArray[i].desc}</td>
-                <td><button class="btn btn-warning" onclick="changeBName(${i})">Update</button></td>
+                <td><button class="btn btn-warning" onclick="changePName(${i})">Update</button></td>
                 <td><button class="btn btn-danger" onclick="deleteProduct(${i})">Delete</button></td>
             </tr>
         `
@@ -81,7 +82,7 @@ function display() {
 let updateIndex;
 
 // ================ Change BTN Name To Update ================
-function changeBName(indexRow) {
+function changePName(indexRow) {
     updateIndex = indexRow;
     getProductsFromUpdate();
     mainBtn.classList.replace("btn-outline-secondary", "btn-warning");
@@ -95,6 +96,7 @@ function updateProduct() {
     CRUDSArray[updateIndex].price = productPrice.value;
     CRUDSArray[updateIndex].cat = productCategory.value;
     CRUDSArray[updateIndex].desc = productDescription.value;
+    localStorage.setItem("CRUDS_Data", JSON.stringify(CRUDSArray));
     clear();
     mainBtn.classList.replace("btn-warning", "btn-outline-secondary");
     mainBtn.innerHTML = "Add Product";
@@ -144,49 +146,50 @@ function clear() {
     productPrice.value = "";
     productCategory.value = "";
     productDescription.value = "";
+
+    productName.classList.remove("is-valid");
+    productPrice.classList.remove("is-valid");
+    productCategory.classList.remove("is-valid");
 }
 
+// =======================================================================================
 // ================ If The Fields Empty Validation ================
+let emptyMss = document.querySelector(".ifEmpty");
+
 function isEmpty() {
-    if (productName.value == "")  {
-        productName.classList.add("is-invalid");
-        productName.classList.remove("is-valid");
-        return false;
-    }
-    if (productPrice.value == "")  {
-        productPrice.classList.add("is-invalid");
-        productPrice.classList.remove("is-valid");
-        return false;
-    }
-    if (productCategory.value == "")  {
-        productCategory.classList.add("is-invalid");
-        productCategory.classList.remove("is-valid");
-        return false;
-    }
-    if (productDescription.value == "")  {
-        productDescription.classList.add("is-invalid");
-        productDescription.classList.remove("is-valid");
+    if (productName.value == "" || productPrice.value == "" || productCategory.value == "" || productDescription.value == "")  {
+        emptyMss.classList.replace("d-none", "d-block");
         return false;
     }
     else {
-        // productName.classList.remove("is-invalid");
-        // productName.classList.remove("is-valid");
-        // productPrice.classList.remove("is-invalid");
-        // productPrice.classList.remove("is-valid");
-        // productCategory.classList.remove("is-invalid");
-        // productCategory.classList.remove("is-valid");
-        // productDescription.classList.remove("is-invalid");
-        // productDescription.classList.remove("is-valid");
+        emptyMss.classList.replace("d-block", "d-none");
         return true;
     }
 }
+
+// ================ Is Exist Function ================
+// let existMss = document.querySelector(".ifExist");
+
+// function isExist() {
+//     for (let i = 0; i < CRUDSArray.length; i++) {
+//         if (productName.value == CRUDSArray[i].name && productPrice.value == CRUDSArray[i].price && productCategory.value == CRUDSArray[i].cat ) {
+//             existMss.classList.replace("d-none", "d-block");
+//             return false;
+//         }
+//         else {
+//             existMss.classList.replace("d-block", "d-none");
+//             return true;
+//         }
+//     }
+// }
+// Not completed yet. The loop iterate over the first product only and show the message if true, however the identical product can be added if exist!
 
 // ================ Product Name Validation ================
 let productErrMss = document.querySelector(".productErrMss");
 
 productName.addEventListener("keyup", function () {
     let productNameVal = productName.value;
-    let pNameRegex = /^[A-Z][a-zA-Z]+\s?[A-Z]?[a-zA-Z]+$/;
+    let pNameRegex = /^[A-Z][a-zA-Z ]+?[A-Z]?[a-zA-Z ]+$/;
 
     if (pNameRegex.test(productNameVal) == true) {
         productName.classList.add("is-valid");
