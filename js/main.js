@@ -47,8 +47,8 @@ mainBtn.addEventListener('click', function () {
             localStorage.setItem("CRUDS_Data", JSON.stringify(CRUDSArray));
 
             display();
-            isExist();
             clear();
+            // isExist();
         }
     }
     else {
