@@ -36,19 +36,21 @@ mainBtn.addEventListener('click', function () {
     // ================ Check The BTN Is Add Or Update ================
     if (mainBtn.innerHTML == "Add Product") {
         if (isEmpty()) {
-            let product = {
-                name: productName.value,
-                price: productPrice.value,
-                cat: productCategory.value,
-                desc: productDescription.value
+            if (isExist()) {
+                let product = {
+                    name: productName.value,
+                    price: productPrice.value,
+                    cat: productCategory.value,
+                    desc: productDescription.value
+                }
+
+                CRUDSArray.push(product);
+                localStorage.setItem("CRUDS_Data", JSON.stringify(CRUDSArray));
+
+                // isExist();
+                display();
+                clear();
             }
-
-            CRUDSArray.push(product);
-            localStorage.setItem("CRUDS_Data", JSON.stringify(CRUDSArray));
-
-            display();
-            clear();
-            // isExist();
         }
     }
     else {
@@ -157,7 +159,7 @@ function clear() {
 let emptyMss = document.querySelector(".ifEmpty");
 
 function isEmpty() {
-    if (productName.value == "" || productPrice.value == "" || productCategory.value == "" || productDescription.value == "")  {
+    if (productName.value == "" || productPrice.value == "" || productCategory.value == "" || productDescription.value == "") {
         emptyMss.classList.replace("d-none", "d-block");
         return false;
     }
@@ -168,21 +170,28 @@ function isEmpty() {
 }
 
 // ================ Is Exist Function ================
-// let existMss = document.querySelector(".ifExist");
+let existMss = document.querySelector(".ifExist");
+let didFind = false;
 
-// function isExist() {
-//     for (let i = 0; i < CRUDSArray.length; i++) {
-//         if (productName.value == CRUDSArray[i].name && productPrice.value == CRUDSArray[i].price && productCategory.value == CRUDSArray[i].cat ) {
-//             existMss.classList.replace("d-none", "d-block");
-//             return false;
-//         }
-//         else {
-//             existMss.classList.replace("d-block", "d-none");
-//             return true;
-//         }
-//     }
-// }
-// Not completed yet. The loop iterate over the first product only and show the message if true, however the identical product can be added if exist!
+function isExist() {
+    for (let i = 0; i < CRUDSArray.length ; i++) {
+        if (productName.value === CRUDSArray[i].name && productPrice.value === CRUDSArray[i].price) {
+            didFind = true;
+            // console.log("Found match");
+        }
+        if (didFind) {
+            console.log("Found match");
+            didFind = false;
+            existMss.classList.replace("d-none", "d-block");
+            return false;
+        }
+        else if (!didFind) {
+            console.log("Didn't find any match");
+            existMss.classList.replace("d-block", "d-none");
+            return true;
+        }
+    }
+}
 
 // ================ Product Name Validation ================
 let productErrMss = document.querySelector(".productErrMss");
