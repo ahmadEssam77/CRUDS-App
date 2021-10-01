@@ -169,7 +169,7 @@ function isEmpty() {
     }
 }
 
-// ================ Is Exist Function ================
+//! ================ Is Exist Function ================
 let existMss = document.querySelector(".ifExist");
 let didFind = false;
 
@@ -177,20 +177,22 @@ function isExist() {
     for (let i = 0; i < CRUDSArray.length ; i++) {
         if (productName.value === CRUDSArray[i].name && productPrice.value === CRUDSArray[i].price) {
             didFind = true;
-            // console.log("Found match");
+            break;
         }
-        if (didFind) {
-            console.log("Found match");
+        else {
             didFind = false;
-            existMss.classList.replace("d-none", "d-block");
-            return false;
-        }
-        else if (!didFind) {
-            console.log("Didn't find any match");
-            existMss.classList.replace("d-block", "d-none");
-            return true;
         }
     }
+
+    if (didFind) {
+        existMss.classList.replace("d-none", "d-block");
+        return false;
+    }
+    else {
+        existMss.classList.replace("d-block", "d-none");
+        return true;
+    }
+    
 }
 
 // ================ Product Name Validation ================
@@ -211,24 +213,4 @@ productName.addEventListener("keyup", function () {
         productErrMss.classList.replace("d-none", "d-block");
     }
 });
-
-// ================ Product Price Validation ================
-// let priceErrMss = document.querySelector(".priceErrMss");
-
-// productPrice.addEventListener("keyup", function () {
-//     if (!isNaN(productPrice.value)) {
-//         console.log("Yes, this is a number");
-//         if (productPrice.value >= 100 && productPrice.value <= 1000000) {   => this is not working should make it regex
-//             productPrice.classList.add("is-valid");
-//             productPrice.classList.remove("is-invalid");
-//             priceErrMss.classList.replace("d-block", "d-none");
-//         }
-//     }
-//     else {
-//         console.log("No, not a number");
-//         productPrice.classList.remove("is-valid");
-//         productPrice.classList.add("is-invalid");
-//         priceErrMss.classList.replace("d-none", "d-block");
-//     }
-// });
 
